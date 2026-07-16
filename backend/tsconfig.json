@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+
+    "declaration": true,
+    "sourceMap": true,
+    "removeComments": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "strict": true,
+    "strictNullChecks": true,
+
+    "skipLibCheck": true,
+    "incremental": true,
+
+    "baseUrl": "./",
+    "outDir": "./dist",
+
+    "resolvePackageJsonExports": true,
+    "isolatedModules": true,
+
+    "forceConsistentCasingInFileNames": true
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "prisma/**/*.ts",
+    "src/products/dto/product-response.dtots"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

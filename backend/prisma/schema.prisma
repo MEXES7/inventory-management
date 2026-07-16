@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  IN_STOCK
+  LOW_STOCK
+  OUT_OF_STOCK
+}
+
+enum StockReason {
+  RESTOCK
+  SALE
+  ADJUSTMENT
+}
+
+model Product {
+  id        String         @id @default(uuid())
+  sku       String         @unique 
+  name      String
+  quantity  Int
+  price     Decimal        @db.Decimal(10,2)
+  status    ProductStatus
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  stockLogs StockLog[]
+}
+
+model StockLog {
+  id           String      @id @default(uuid())
+  productId    String
+  changeAmount Int
+  reason       StockReason
+  timestamp    DateTime    @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
